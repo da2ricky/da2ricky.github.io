@@ -1,69 +1,395 @@
-Privacy Policy
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - The Civic Vault</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-blue: #2563eb;
+            --primary-blue-dark: #1d4ed8;
+            --secondary-blue: #3b82f6;
+            --text-dark: #1f2937;
+            --text-light: #6b7280;
+            --text-white: #ffffff;
+            --bg-white: #ffffff;
+            --bg-light: #f8fafc;
+            --bg-gray: #f1f5f9;
+            --border-light: #e5e7eb;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
 
-Effective Date: 8/20/2025
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-Social Keeper (“we,” “our,” or “us”) is a subscription-based service that archives Facebook Pages with the explicit consent of the Page owner. We value your trust and are committed to protecting your information. This Privacy Policy explains how we collect, use, store, and share data when you use Social Keeper.
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--text-white);
+            background-color: var(--text-dark);
+        }
 
-1. Information We Collect
+        /* Header */
+        header {
+            background: var(--bg-light);
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-light);
+        }
 
-When you use Social Keeper, we may collect the following:
+        nav {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.75rem 0;
+            gap: 1rem;
+        }
 
-Facebook Page Data – Posts, comments, attachments (images, videos, files), and related metadata (timestamps, authorship) that you authorize us to access.
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: var(--text-dark);
+        }
 
-Account Information – Your name, email address, payment details (processed securely by third-party providers), and Facebook Page identifiers to manage your subscription and verify ownership.
+        .logo-icon {
+            width: 120px;
+            height: 120px;
+            background: none;
+            border-radius: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: none;
+        }
 
-Technical Information – Basic server logs (e.g., IP addresses, request times) for security and troubleshooting.
+        .nav-links {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
 
-We do not collect personal data from individuals who interact with your Facebook Page unless it is included in posts or comments you choose to archive.
+        .nav-links a {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 0.5rem 0.75rem;
+            border-radius: 10px;
+            transition: all 0.2s ease;
+            position: relative;
+            background: transparent;
+        }
 
-2. How We Use Information
+        .nav-links a:hover {
+            color: var(--primary-blue);
+            background: var(--bg-white);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
 
-We use collected information solely to:
+        .nav-links a:focus-visible {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.3);
+        }
 
-Archive and store Facebook Page content at your request.
+        .cta-button {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+            color: var(--text-white);
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
 
-Generate encrypted evidence bundles (ZIP archives with cryptographic manifests).
+        .cta-button:hover {
+            background: linear-gradient(135deg, var(--primary-blue-dark) 0%, var(--primary-blue) 100%);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary-blue-dark);
+        }
 
-Manage your subscription, billing, and account preferences.
+        /* Main Content */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
 
-Provide secure access to your dashboard and archived records.
+        .privacy-content {
+            background: var(--bg-white);
+            margin: 3rem 0;
+            padding: 4rem;
+            border-radius: 16px;
+            box-shadow: var(--shadow-lg);
+        }
 
-Maintain security, performance, and reliability of the service.
+        .privacy-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 2px solid var(--bg-light);
+        }
 
-We do not sell, rent, or trade your information to third parties.
+        .privacy-title {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
 
-3. Consent and Permissions
+        .effective-date {
+            font-size: 1.125rem;
+            color: var(--text-light);
+            font-weight: 500;
+        }
 
-Social Keeper only archives data from Facebook Pages where the Page owner has explicitly granted authorization via Facebook’s official login/permissions flow.
+        .privacy-intro {
+            font-size: 1.125rem;
+            color: var(--text-dark);
+            line-height: 1.7;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: var(--bg-light);
+            border-radius: 12px;
+            border-left: 4px solid var(--primary-blue);
+        }
 
-You may revoke our access at any time through your Facebook settings or by contacting us.
+        .section {
+            margin-bottom: 3rem;
+        }
 
-4. Data Storage & Security
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary-blue);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border-light);
+        }
 
-Archived data is stored securely in our databases and/or encrypted evidence bundles.
+        .section-content {
+            color: var(--text-dark);
+            line-height: 1.7;
+        }
 
-We use industry-standard security measures, including encryption, restricted access, and audit logging.
+        .section-content p {
+            margin-bottom: 1.5rem;
+        }
 
-Data is retained only as long as necessary to provide the service or as required by law.
+        .info-list {
+            list-style: none;
+            margin: 1.5rem 0;
+        }
 
-5. Sharing of Information
+        .info-list li {
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background: var(--bg-light);
+            border-radius: 8px;
+            border-left: 3px solid var(--primary-blue);
+            position: relative;
+        }
 
-We may share information only in the following limited circumstances:
+        .info-list li strong {
+            color: var(--primary-blue);
+            font-weight: 600;
+        }
 
-With Service Providers – Third-party vendors (e.g., hosting, payment processors, storage, encryption providers) who help us deliver the service.
+        .contact-info {
+            background: var(--primary-blue);
+            color: var(--text-white);
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            margin-top: 2rem;
+        }
 
-For Legal Reasons – When required by law, regulation, or a valid legal request.
+        .contact-info a {
+            color: var(--text-white);
+            text-decoration: underline;
+            font-weight: 600;
+        }
 
-We do not otherwise share or disclose archived content.
+        .contact-info a:hover {
+            text-decoration: none;
+        }
 
-6. Your Rights
+        /* Footer */
+        footer {
+            background: var(--bg-white);
+            padding: 3rem 0;
+            text-align: center;
+            border-top: 1px solid var(--border-light);
+        }
 
-As a Social Keeper subscriber, you may:
+        .footer-content {
+            color: var(--text-light);
+        }
 
-Request a copy of your archived data.
+        .footer-content a {
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-weight: 500;
+        }
 
-Request deletion of your account and associated data.
+        .footer-content a:hover {
+            text-decoration: underline;
+        }
 
-Revoke Facebook permissions at any time.
+        /* Responsive */
+        @media (max-width: 768px) {
+            .privacy-content {
+                padding: 2rem;
+                margin: 1rem 0;
+            }
 
-To exercise these rights, contact us at help@socialkeeper.com
+            .privacy-title {
+                font-size: 2rem;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="index.html" class="logo">
+                <img src="images/app_logo.png" alt="The Civic Vault" class="logo-icon">
+            </a>
+            <div class="nav-links">
+                <a href="index.html#features">Features</a>
+                <a href="index.html#solutions">Solutions</a>
+                <a href="index.html#pricing">Pricing</a>
+                <a href="index.html#faq">FAQ</a>
+                <a href="index.html#contact" class="cta-button">Notify When Available</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="privacy-content">
+                <div class="privacy-header">
+                    <h1 class="privacy-title">Privacy Policy</h1>
+                    <p class="effective-date">Effective Date: August 20, 2025</p>
+                </div>
+
+                <div class="privacy-intro">
+                    The Civic Vault ("we," "our," or "us") is a subscription-based service that archives Facebook Pages with the explicit consent of the Page owner. We value your trust and are committed to protecting your information. This Privacy Policy explains how we collect, use, store, and share data when you use The Civic Vault.
+                </div>
+
+                <div class="section">
+                    <h2 class="section-title">1. Information We Collect</h2>
+                    <div class="section-content">
+                        <p>When you use The Civic Vault, we may collect the following:</p>
+                        <ul class="info-list">
+                            <li><strong>Facebook Page Data</strong> – Posts, comments, attachments (images, videos, files), and related metadata (timestamps, authorship) that you authorize us to access.</li>
+                            <li><strong>Account Information</strong> – Your name, email address, payment details (processed securely by third-party providers), and Facebook Page identifiers to manage your subscription and verify ownership.</li>
+                            <li><strong>Technical Information</strong> – Basic server logs (e.g., IP addresses, request times) for security and troubleshooting.</li>
+                        </ul>
+                        <p>We do not collect personal data from individuals who interact with your Facebook Page unless it is included in posts or comments you choose to archive.</p>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2 class="section-title">2. How We Use Information</h2>
+                    <div class="section-content">
+                        <p>We use collected information solely to:</p>
+                        <ul class="info-list">
+                            <li>Archive and store Facebook Page content at your request.</li>
+                            <li>Generate encrypted evidence bundles (ZIP archives with cryptographic manifests).</li>
+                            <li>Manage your subscription, billing, and account preferences.</li>
+                            <li>Provide secure access to your dashboard and archived records.</li>
+                            <li>Maintain security, performance, and reliability of the service.</li>
+                        </ul>
+                        <p><strong>We do not sell, rent, or trade your information to third parties.</strong></p>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2 class="section-title">3. Consent and Permissions</h2>
+                    <div class="section-content">
+                        <p>The Civic Vault only archives data from Facebook Pages where the Page owner has explicitly granted authorization via Facebook's official login/permissions flow.</p>
+                        <p>You may revoke our access at any time through your Facebook settings or by contacting us.</p>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2 class="section-title">4. Data Storage & Security</h2>
+                    <div class="section-content">
+                        <ul class="info-list">
+                            <li>Archived data is stored securely in our databases and/or encrypted evidence bundles.</li>
+                            <li>We use industry-standard security measures, including encryption, restricted access, and audit logging.</li>
+                            <li>Data is retained only as long as necessary to provide the service or as required by law.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2 class="section-title">5. Sharing of Information</h2>
+                    <div class="section-content">
+                        <p>We may share information only in the following limited circumstances:</p>
+                        <ul class="info-list">
+                            <li><strong>With Service Providers</strong> – Third-party vendors (e.g., hosting, payment processors, storage, encryption providers) who help us deliver the service.</li>
+                            <li><strong>For Legal Reasons</strong> – When required by law, regulation, or a valid legal request.</li>
+                        </ul>
+                        <p>We do not otherwise share or disclose archived content.</p>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2 class="section-title">6. Your Rights</h2>
+                    <div class="section-content">
+                        <p>As a The Civic Vault subscriber, you may:</p>
+                        <ul class="info-list">
+                            <li>Request deletion of your account and associated data.</li>
+                            <li>Revoke Facebook permissions at any time.</li>
+                        </ul>
+                        
+                        <div class="contact-info">
+                            <p>To exercise these rights, contact us at <a href="mailto:info@thecivicvault.com">info@thecivicvault.com</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2025 The Civic Vault. All rights reserved.</p>
+                <p><a href="index.html">Back to Home</a></p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

@@ -3,574 +3,1118 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Civic Vault - Social Media Archiving for Government</title>
+    <title>The Civic Vault - Facebook Page Archiving for Government Compliance</title>
+    <meta name="description" content="The Civic Vault securely archives Facebook Pages for records retention and evidence. Real-time capture with court-ready evidence bundles.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary-blue: #1e40af;
+            --primary-blue-dark: #1e3a8a;
+            --secondary-blue: #3b82f6;
+            --accent-blue: #60a5fa;
+            --text-dark: #1f2937;
+            --text-light: #6b7280;
+            --text-white: #ffffff;
+            --bg-white: #ffffff;
+            --bg-light: #f8fafc;
+            --bg-gray: #f1f5f9;
+            --border-light: #e2e8f0;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+        }
+
+        /* Additional dark theme variables */
+        :root {
+            --bg-deep: #0b1220;
+            --bg-deeper: #111827;
+            --text-white-dim: rgba(255, 255, 255, 0.82);
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        :root {
-            --bg-primary: #0a0a0a;
-            --bg-secondary: #1a1a1a;
-            --bg-card: #252525;
-            --text-primary: #ffffff;
-            --text-secondary: #a0a0a0;
-            --accent-blue: #00d4ff;
-            --accent-blue-dark: #0099cc;
-            --border-color: #333333;
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-            background: var(--bg-primary);
-            color: var(--text-primary);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             line-height: 1.6;
-            overflow-x: hidden;
+            color: var(--text-white);
+            background-color: var(--text-dark);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
         }
 
         /* Header */
         header {
-            background: linear-gradient(180deg, #1a1a1a 0%, #0a0a0a 100%);
-            padding: 1.5rem 0;
-            position: fixed;
-            width: 100%;
+            background: var(--bg-light);
+            box-shadow: var(--shadow-sm);
+            position: sticky;
             top: 0;
             z-index: 1000;
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-light);
         }
 
         nav {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
             display: flex;
-            justify-content: space-between;
+            flex-direction: row;
             align-items: center;
+            justify-content: space-between;
+            padding: 0.75rem 0;
+            gap: 1rem;
         }
 
         .logo {
             display: flex;
             align-items: center;
-            gap: 1rem;
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--text-primary);
+            justify-content: center;
             text-decoration: none;
+            color: var(--text-dark);
         }
 
         .logo-icon {
-            width: 40px;
-            height: 40px;
-            border: 2px solid var(--accent-blue);
-            border-radius: 8px;
+            width: 120px;
+            height: 120px;
+            background: none;
+            border-radius: 0;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: rgba(0, 212, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+            box-shadow: none;
+        }
+
+        .logo-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
         }
 
         .logo-icon::before {
-            content: "⚡";
+            display: none;
+        }
+
+        .logo-icon::after {
+            display: none;
+        }
+
+        @keyframes shine {
+            0%, 100% { transform: translateX(-100%); }
+            50% { transform: translateX(100%); }
+        }
+
+        .logo-text {
             font-size: 1.5rem;
-            filter: brightness(0) invert(1);
+            font-weight: 700;
+            color: var(--primary-blue);
         }
 
         .nav-links {
             display: flex;
-            gap: 2rem;
+            gap: 1rem;
             list-style: none;
+            align-items: center;
         }
 
         .nav-links a {
-            color: var(--text-secondary);
+            color: var(--text-dark);
             text-decoration: none;
-            transition: color 0.3s;
+            font-weight: 600;
+            padding: 0.5rem 0.75rem;
+            border-radius: 10px;
+            transition: all 0.2s ease;
+            position: relative;
+            background: transparent;
         }
 
         .nav-links a:hover {
-            color: var(--accent-blue);
+            color: var(--primary-blue);
+            background: var(--bg-white);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .nav-links a.active {
+            background: var(--primary-blue);
+            color: var(--text-white);
+            box-shadow: var(--shadow-md);
+        }
+
+        .nav-links a:focus-visible {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.3);
+        }
+
+        .nav-links a:active {
+            transform: translateY(0);
+            box-shadow: var(--shadow-sm);
         }
 
         .cta-button {
-            background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-blue-dark) 100%);
-            color: var(--bg-primary);
-            padding: 0.75rem 2rem;
-            border-radius: 8px;
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+            color: var(--text-white);
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
             text-decoration: none;
-            font-weight: 600;
-            transition: transform 0.3s, box-shadow 0.3s;
-            display: inline-block;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
         }
 
         .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+            background: linear-gradient(135deg, var(--primary-blue-dark) 0%, var(--primary-blue) 100%);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary-blue-dark);
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .cta-button:active {
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
         }
 
         /* Hero Section */
         .hero {
-            margin-top: 80px;
-            padding: 6rem 2rem;
+            background: linear-gradient(135deg, var(--bg-deep) 0%, var(--bg-deeper) 100%);
+            padding: 6rem 0;
             text-align: center;
-            background: radial-gradient(circle at 50% 50%, rgba(0, 212, 255, 0.1) 0%, transparent 50%);
-            min-height: 80vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
 
         .hero-content {
-            max-width: 900px;
+            max-width: 800px;
             margin: 0 auto;
         }
 
         .hero h1 {
             font-size: 3.5rem;
+            font-weight: 700;
             margin-bottom: 1.5rem;
-            background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-blue) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: glow 3s ease-in-out infinite;
-        }
-
-        @keyframes glow {
-            0%, 100% { filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.5)); }
-            50% { filter: drop-shadow(0 0 30px rgba(0, 212, 255, 0.8)); }
+            color: var(--text-white);
+            line-height: 1.2;
         }
 
         .hero .tagline {
-            font-size: 1.5rem;
-            color: var(--text-secondary);
+            font-size: 1.25rem;
+            color: var(--text-white-dim);
             margin-bottom: 2rem;
+            font-weight: 400;
         }
 
         .hero-description {
-            font-size: 1.1rem;
-            color: var(--text-secondary);
+            font-size: 1.125rem;
+            color: var(--text-white-dim);
             margin-bottom: 3rem;
-            line-height: 1.8;
+            line-height: 1.7;
         }
 
         .hero-buttons {
             display: flex;
-            gap: 1.5rem;
+            gap: 1rem;
             justify-content: center;
             flex-wrap: wrap;
         }
 
         .secondary-button {
             background: transparent;
-            color: var(--accent-blue);
-            padding: 0.75rem 2rem;
-            border: 2px solid var(--accent-blue);
+            color: var(--primary-blue);
+            padding: 0.75rem 1.5rem;
+            border: 2px solid var(--primary-blue);
             border-radius: 8px;
             text-decoration: none;
             font-weight: 600;
-            transition: all 0.3s;
-            display: inline-block;
+            transition: all 0.2s;
         }
 
         .secondary-button:hover {
-            background: rgba(0, 212, 255, 0.1);
-            box-shadow: 0 5px 20px rgba(0, 212, 255, 0.2);
+            background: var(--primary-blue);
+            color: var(--text-white);
         }
 
         /* Features Section */
         .features {
-            padding: 5rem 2rem;
-            background: var(--bg-secondary);
-        }
-
-        .features-container {
-            max-width: 1200px;
-            margin: 0 auto;
+            padding: 5rem 0;
+            background: transparent;
         }
 
         .section-title {
             text-align: center;
             font-size: 2.5rem;
-            margin-bottom: 3rem;
-            color: var(--text-primary);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-white);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.125rem;
+            color: var(--text-white-dim);
+            margin-bottom: 4rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 2rem;
-        }
-
-        .feature-card {
-            background: var(--bg-card);
-            padding: 2rem;
-            border-radius: 12px;
-            border: 1px solid var(--border-color);
-            transition: transform 0.3s, border-color 0.3s;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .feature-card::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--accent-blue) 0%, var(--accent-blue-dark) 100%);
-            transform: scaleX(0);
-            transition: transform 0.3s;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent-blue);
-        }
-
-        .feature-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .feature-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            color: var(--accent-blue);
-        }
-
-        .feature-title {
-            font-size: 1.3rem;
-            margin-bottom: 1rem;
-            color: var(--text-primary);
-        }
-
-        .feature-description {
-            color: var(--text-secondary);
-            line-height: 1.6;
-        }
-
-        /* Key Benefits */
-        .benefits {
-            padding: 5rem 2rem;
-            background: var(--bg-primary);
-        }
-
-        .benefits-grid {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 3rem;
             margin-top: 3rem;
         }
 
-        .benefit-item {
-            text-align: center;
+        .feature-card {
+            background: var(--bg-white);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-light);
+            box-shadow: var(--shadow-sm);
+            transition: all 0.2s;
         }
 
-        .benefit-icon {
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 1.5rem;
-            background: rgba(0, 212, 255, 0.1);
-            border: 2px solid var(--accent-blue);
-            border-radius: 50%;
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2rem;
-            transition: all 0.3s;
+            margin-bottom: 1.5rem;
         }
 
-        .benefit-item:hover .benefit-icon {
-            background: rgba(0, 212, 255, 0.2);
-            transform: scale(1.1);
+        .feature-icon::before {
+            font-size: 28px;
+            filter: brightness(0) invert(1);
         }
 
-        .benefit-title {
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
-            color: var(--text-primary);
+        .feature-card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
         }
 
-        .benefit-text {
-            color: var(--text-secondary);
+        .feature-card p {
+            color: var(--text-dark);
+            line-height: 1.6;
         }
 
         /* Technical Specs */
         .specs {
-            padding: 5rem 2rem;
-            background: var(--bg-secondary);
+            background: transparent;
+            padding: 5rem 0;
         }
 
-        .specs-content {
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .spec-list {
+        .specs-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
             margin-top: 3rem;
         }
 
-        .spec-item {
-            padding: 1.5rem;
-            background: var(--bg-card);
-            border-radius: 8px;
-            border-left: 3px solid var(--accent-blue);
+        .spec-card {
+            background: var(--bg-white);
+            padding: 2rem;
+            border-radius: 12px;
+            border-left: 4px solid var(--primary-blue);
+            box-shadow: var(--shadow-sm);
         }
 
-        .spec-item h4 {
-            color: var(--accent-blue);
+        .spec-card h4 {
+            color: var(--primary-blue);
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .spec-card p {
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* Solutions Section */
+        .solutions {
+            padding: 5rem 0;
+            background: transparent;
+        }
+
+        .solutions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .solution-card {
+            background: var(--bg-white);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s;
+            border: 1px solid var(--border-light);
+        }
+
+        .solution-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .solution-image {
+            height: 200px;
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: var(--text-white);
+        }
+
+        .solution-content {
+            padding: 2rem;
+        }
+
+        .solution-content h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .solution-content p {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .solution-features {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .solution-features li {
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .solution-features li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--primary-blue);
+            font-weight: bold;
+        }
+
+        .learn-more {
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: gap 0.2s;
+        }
+
+        .learn-more:hover {
+            gap: 0.75rem;
+        }
+
+        /* Pricing Section */
+        .pricing {
+            background: transparent;
+            padding: 5rem 0;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .pricing-card {
+            background: var(--bg-white);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s;
+            border: 2px solid var(--border-light);
+            position: relative;
+        }
+
+        .pricing-card.featured {
+            border-color: var(--primary-blue);
+            transform: scale(1.05);
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .pricing-card.featured:hover {
+            transform: scale(1.05) translateY(-8px);
+        }
+
+        .featured-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--primary-blue);
+            color: var(--text-white);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .pricing-header {
+            padding: 2rem 2rem 1rem;
+            text-align: center;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .plan-name {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .plan-price {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary-blue);
             margin-bottom: 0.5rem;
         }
 
-        .spec-item p {
-            color: var(--text-secondary);
+        .plan-period {
+            color: var(--text-light);
+            font-size: 1rem;
+        }
+
+        .pricing-features {
+            padding: 2rem;
+        }
+
+        .pricing-features ul {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .pricing-features li {
+            color: var(--text-light);
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .pricing-features li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--primary-blue);
+            font-weight: bold;
+        }
+
+        .pricing-cta {
+            padding: 0 2rem 2rem;
+            text-align: center;
+        }
+
+        .pricing-cta .cta-button {
+            width: 100%;
+            text-align: center;
+            padding: 1rem 2rem;
+        }
+
+        /* FAQ Section */
+        .faq {
+            background: transparent;
+            padding: 5rem 0;
+        }
+
+        .faq-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .faq-item {
+            background: var(--bg-white);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .faq-item h4 {
+            color: var(--primary-blue);
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .faq-item p {
+            color: var(--text-dark);
+            line-height: 1.6;
         }
 
         /* CTA Section */
         .cta-section {
-            padding: 6rem 2rem;
-            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1) 0%, transparent 100%);
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-blue-dark) 100%);
+            padding: 4rem 0;
             text-align: center;
+            color: var(--text-white);
         }
 
-        .cta-content {
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .cta-content h2 {
+        .cta-section h2 {
             font-size: 2.5rem;
-            margin-bottom: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
         }
 
-        .cta-content p {
-            font-size: 1.2rem;
-            color: var(--text-secondary);
+        .cta-section p {
+            font-size: 1.125rem;
             margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-section .cta-button {
+            background: var(--text-white);
+            color: var(--primary-blue);
+            font-size: 1.125rem;
+            padding: 1rem 2rem;
+        }
+
+        .cta-section .cta-button:hover {
+            background: var(--bg-light);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-xl);
         }
 
         /* Footer */
         footer {
-            background: var(--bg-secondary);
-            padding: 3rem 2rem;
-            text-align: center;
-            border-top: 1px solid var(--border-color);
+            background: var(--bg-white);
+            color: var(--text-dark);
+            padding: 3rem 0 2rem;
+            border-top: 1px solid var(--border-light);
         }
 
         .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
         }
 
-        .footer-text {
-            color: var(--text-secondary);
+        .footer-section h4 {
+            font-size: 1.125rem;
+            font-weight: 600;
             margin-bottom: 1rem;
+            color: var(--primary-blue);
         }
 
-        /* Responsive */
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section ul li a {
+            color: var(--text-dark);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-section ul li a:hover {
+            color: var(--primary-blue);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--border-light);
+            padding-top: 2rem;
+            text-align: center;
+            color: var(--text-light);
+        }
+
+        /* Responsive Design */
         @media (max-width: 768px) {
+            .nav-links {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 0.5rem;
+            }
+            
             .hero h1 {
                 font-size: 2.5rem;
             }
             
-            .hero .tagline {
-                font-size: 1.2rem;
+            .features-grid,
+            .solutions-grid,
+            .pricing-grid {
+                grid-template-columns: 1fr;
             }
             
-            .nav-links {
-                display: none;
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
             }
-            
-            .features-grid {
+
+            .pricing-card.featured {
+                transform: none;
+            }
+
+            .faq-grid {
                 grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
+    <!-- Header -->
     <header>
-        <nav>
-            <a href="#" class="logo">
-                <div class="logo-icon"></div>
-                <span>THE CIVIC VAULT</span>
+        <nav class="container">
+            <a href="#hero" class="logo">
+                <div class="logo-icon">
+                    <img src="images/app_logo.png" alt="The Civic Vault Logo">
+                </div>
             </a>
             <ul class="nav-links">
-                <li><a href="#features">Features</a></li>
-                <li><a href="#benefits">Benefits</a></li>
-                <li><a href="#specs">Technical</a></li>
+                <li><a href="#features" data-spy>Features</a></li>
+                <li><a href="#solutions" data-spy>Solutions</a></li>
+                <li><a href="#pricing" data-spy>Pricing</a></li>
+                <li><a href="#faq" data-spy>FAQ</a></li>
+                <li><a href="#contact" class="cta-button">Notify When Available</a></li>
             </ul>
-            <a href="#contact" class="cta-button">Request Demo</a>
         </nav>
     </header>
 
-    <section class="hero">
-        <div class="hero-content">
-            <h1>THE CIVIC VAULT</h1>
-            <p class="tagline">Social Media Archiving for Government Compliance</p>
-            <p class="hero-description">
-                Secure, automated archiving of Facebook Pages for public records retention and evidence preservation. 
-                Capture every post, comment, and deletion with legally defensible chain of custody.
-            </p>
-            <div class="hero-buttons">
-                <a href="#contact" class="cta-button">Get Early Access</a>
-                <a href="#features" class="secondary-button">Learn More</a>
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Secure Facebook Page Archiving for Government Compliance</h1>
+                <p class="tagline">Real-time capture and preservation of Facebook content with legally defensible evidence bundles</p>
+                <p class="hero-description">
+                    The Civic Vault automatically archives Facebook Pages, capturing every post, comment, reaction, share, and deletion in real-time. 
+                    Our platform preserves deleted content with timestamps, stores media files, and generates court-ready evidence bundles with digital signatures.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#contact" class="cta-button">Notify When Available</a>
+                    <a href="#features" class="secondary-button">Learn More</a>
+                </div>
             </div>
         </div>
     </section>
 
-    <section id="features" class="features">
-        <div class="features-container">
-            <h2 class="section-title">Enterprise-Grade Archiving</h2>
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <h2 class="section-title">Why Choose The Civic Vault?</h2>
+            <p class="section-subtitle">
+                Enterprise-grade Facebook archiving with real-time capture, media preservation, and court-ready evidence bundles
+            </p>
             <div class="features-grid">
                 <div class="feature-card">
                     <div class="feature-icon">⚡</div>
-                    <h3 class="feature-title">Real-Time Capture</h3>
-                    <p class="feature-description">
-                        Webhook-driven archiving captures new activity instantly. Preserves deleted content with timestamps for complete records.
-                    </p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🔒</div>
-                    <h3 class="feature-title">Evidence Bundles</h3>
-                    <p class="feature-description">
-                        Generate signed ZIP exports with inventories, checksums, and digital signatures. Court-ready chain of custody documentation.
-                    </p>
+                    <h3>Real-Time Webhook Capture</h3>
+                    <p>Webhook-driven archiving captures new Facebook activity instantly, preserving deleted content with timestamps for complete records.</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">🔍</div>
-                    <h3 class="feature-title">Advanced Search</h3>
-                    <p class="feature-description">
-                        Filter by date, deleted status, and media type. Find any content instantly across your entire archive.
-                    </p>
+                    <h3>Advanced Search & Filtering</h3>
+                    <p>Filter archives by date, deleted status, and media type. Find any content instantly across your entire Facebook Page archive.</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">📸</div>
-                    <h3 class="feature-title">Media Preservation</h3>
-                    <p class="feature-description">
-                        Automatically downloads and stores photos, videos, and thumbnails. Never lose media when posts are deleted.
-                    </p>
+                    <h3>Complete Media Preservation</h3>
+                    <p>Automatically downloads and stores photos, videos, and thumbnails. Never lose media when Facebook posts are deleted.</p>
                 </div>
                 <div class="feature-card">
-                    <div class="feature-icon">📊</div>
-                    <h3 class="feature-title">System Monitoring</h3>
-                    <p class="feature-description">
-                        Real-time metrics for CPU, memory, disk usage. Built-in health checks ensure continuous operation.
-                    </p>
+                    <div class="feature-icon">📦</div>
+                    <h3>Court-Ready Evidence Bundles</h3>
+                    <p>Generate signed ZIP exports with inventories, checksums, PDF/JSON/CSV formats, and digital signatures for legal proceedings.</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">🔄</div>
-                    <h3 class="feature-title">Backfill & Sync</h3>
-                    <p class="feature-description">
-                        On-demand syncing to fill gaps or re-run collections. Never miss critical content.
-                    </p>
+                    <h3>Backfill & Sync</h3>
+                    <p>On-demand syncing to fill gaps or re-run collections. Never miss critical Facebook content with flexible archiving options.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>System Monitoring</h3>
+                    <p>Real-time metrics for CPU, memory, disk usage, and uptime. Built-in health checks ensure continuous Facebook archiving operation.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="benefits" class="benefits">
-        <div class="section-title">Built for Government</div>
-        <div class="benefits-grid">
-            <div class="benefit-item">
-                <div class="benefit-icon">✓</div>
-                <h3 class="benefit-title">Compliance Ready</h3>
-                <p class="benefit-text">Meet FOIA, state sunshine laws, and retention requirements</p>
-            </div>
-            <div class="benefit-item">
-                <div class="benefit-icon">🛡️</div>
-                <h3 class="benefit-title">Legally Defensible</h3>
-                <p class="benefit-text">Digital signatures and chain of custody for court admissibility</p>
-            </div>
-            <div class="benefit-item">
-                <div class="benefit-icon">🚀</div>
-                <h3 class="benefit-title">Easy Deployment</h3>
-                <p class="benefit-text">Docker containerized with simple configuration</p>
-            </div>
-            <div class="benefit-item">
-                <div class="benefit-icon">🔐</div>
-                <h3 class="benefit-title">Enterprise Security</h3>
-                <p class="benefit-text">JWT authentication, rate limiting, structured logging</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="specs" class="specs">
-        <div class="specs-content">
+    <!-- Technical Specs -->
+    <section class="specs" id="specs">
+        <div class="container">
             <h2 class="section-title">Technical Excellence</h2>
-            <div class="spec-list">
-                <div class="spec-item">
-                    <h4>Modern Architecture</h4>
-                    <p>FastAPI backend with Redis caching, SQLite storage, and responsive SPA interface</p>
+            <p class="section-subtitle">
+                Built with modern technology for enterprise reliability and government compliance
+            </p>
+            <div class="specs-grid">
+                <div class="spec-card">
+                    <h4>FastAPI Backend</h4>
+                    <p>High-performance Python backend with Redis caching, SQLite storage, and comprehensive REST APIs for integration.</p>
                 </div>
-                <div class="spec-item">
-                    <h4>Export Formats</h4>
-                    <p>PDF, JSON, CSV exports with checksums and digital signatures</p>
+                <div class="spec-card">
+                    <h4>Containerized Deployment</h4>
+                    <p>Docker Compose services with health checks, auto-restart policies, and optional nginx reverse proxy.</p>
                 </div>
-                <div class="spec-item">
-                    <h4>Container Ready</h4>
-                    <p>Docker Compose deployment with health checks and auto-restart policies</p>
+                <div class="spec-card">
+                    <h4>Enterprise Security</h4>
+                    <p>JWT authentication, CORS controls, rate limiting, and structured logging for compliance and audit trails.</p>
                 </div>
-                <div class="spec-item">
-                    <h4>API-First Design</h4>
-                    <p>RESTful APIs for integration with existing systems and workflows</p>
-                </div>
-                <div class="spec-item">
-                    <h4>Scalable Storage</h4>
-                    <p>Structured filesystem with separate media, export, and log directories</p>
-                </div>
-                <div class="spec-item">
+                <div class="spec-card">
                     <h4>Admin Dashboard</h4>
-                    <p>Intuitive UI with dark mode, real-time metrics, and bulk operations</p>
+                    <p>Intuitive SPA interface with dark mode, real-time metrics, bulk operations, and comprehensive archive management.</p>
+                </div>
+                <div class="spec-card">
+                    <h4>Evidence Export</h4>
+                    <p>Multiple export formats (PDF, JSON, CSV) with checksums, digital signatures, and chain of custody documentation.</p>
+                </div>
+                <div class="spec-card">
+                    <h4>Scalable Storage</h4>
+                    <p>Organized filesystem structure with separate directories for data, media, exports, and logs.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="contact" class="cta-section">
-        <div class="cta-content">
-            <h2>Ready for Launch</h2>
-            <p>Be among the first agencies to modernize your social media archiving</p>
-            <a href="mailto:info@thecivicvault.com" class="cta-button">Request Early Access</a>
+    <!-- Solutions Section -->
+    <section class="solutions" id="solutions">
+        <div class="container">
+            <h2 class="section-title">Solutions for Every Government Sector</h2>
+            <p class="section-subtitle">
+                Tailored social media archiving solutions designed to meet the unique compliance needs of different government organizations
+            </p>
+            <div class="solutions-grid">
+                <div class="solution-card">
+                    <div class="solution-image">🏛️</div>
+                    <div class="solution-content">
+                        <h3>Local Government</h3>
+                        <p>Comprehensive archiving solutions for cities, counties, and municipalities to maintain transparency and meet public records requirements.</p>
+                        <ul class="solution-features">
+                            <li>FOIA compliance automation</li>
+                            <li>Multi-department archiving</li>
+                            <li>Public records request support</li>
+                            <li>Local ordinance compliance</li>
+                        </ul>
+                        <a href="#contact" class="learn-more">Learn More →</a>
+                    </div>
+                </div>
+
+                <div class="solution-card">
+                    <div class="solution-image">🏛️</div>
+                    <div class="solution-content">
+                        <h3>State Government</h3>
+                        <p>Enterprise-grade archiving for state agencies, departments, and elected officials to ensure statewide compliance and transparency.</p>
+                        <ul class="solution-features">
+                            <li>State public records laws</li>
+                            <li>Multi-agency coordination</li>
+                            <li>Legislative compliance</li>
+                            <li>Statewide audit trails</li>
+                        </ul>
+                        <a href="#contact" class="learn-more">Learn More →</a>
+                    </div>
+                </div>
+
+                <div class="solution-card">
+                    <div class="solution-image">🇺🇸</div>
+                    <div class="solution-content">
+                        <h3>Federal Agencies</h3>
+                        <p>High-security archiving solutions for federal departments, agencies, and contractors to meet federal record-keeping requirements.</p>
+                        <ul class="solution-features">
+                            <li>Federal record retention</li>
+                            <li>Security clearance compliance</li>
+                            <li>NARA guidelines support</li>
+                            <li>Multi-level security</li>
+                        </ul>
+                        <a href="#contact" class="learn-more">Learn More →</a>
+                    </div>
+                </div>
+
+                <div class="solution-card">
+                    <div class="solution-image">🎓</div>
+                    <div class="solution-content">
+                        <h3>K-12 Education</h3>
+                        <p>Educational compliance solutions for school districts, charter schools, and educational institutions to maintain student privacy and transparency.</p>
+                        <ul class="solution-features">
+                            <li>FERPA compliance</li>
+                            <li>Student privacy protection</li>
+                            <li>Parent communication archiving</li>
+                            <li>Educational transparency</li>
+                        </ul>
+                        <a href="#contact" class="learn-more">Learn More →</a>
+                    </div>
+                </div>
+
+                <div class="solution-card">
+                    <div class="solution-image">🏫</div>
+                    <div class="solution-content">
+                        <h3>Higher Education</h3>
+                        <p>University and college archiving solutions for research institutions, public universities, and educational organizations.</p>
+                        <ul class="solution-features">
+                            <li>Research compliance</li>
+                            <li>Academic freedom protection</li>
+                            <li>Grant compliance archiving</li>
+                            <li>Student organization records</li>
+                        </ul>
+                        <a href="#contact" class="learn-more">Learn More →</a>
+                    </div>
+                </div>
+
+                <div class="solution-card">
+                    <div class="solution-image">🚔</div>
+                    <div class="solution-content">
+                        <h3>Public Safety</h3>
+                        <p>Law enforcement and emergency services archiving for police departments, fire departments, and emergency management agencies.</p>
+                        <ul class="solution-features">
+                            <li>Evidence preservation</li>
+                            <li>Emergency communication logs</li>
+                            <li>Public safety transparency</li>
+                            <li>Incident documentation</li>
+                        </ul>
+                        <a href="#contact" class="learn-more">Learn More →</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
+    <!-- Pricing Section -->
+    <section class="pricing" id="pricing">
+        <div class="container">
+            <h2 class="section-title">Simple, Transparent Pricing</h2>
+            <p class="section-subtitle">
+                Choose the plan that fits your government organization's Facebook archiving needs
+            </p>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3 class="plan-name">Starter</h3>
+                        <div class="plan-price">TBD</div>
+                        <div class="plan-period">to be determined</div>
+                    </div>
+                    <div class="pricing-features">
+                        <ul>
+                            <li>Up to 5 Facebook Pages</li>
+                            <li>Real-time archiving</li>
+                            <li>Basic search & filtering</li>
+                            <li>Media preservation</li>
+                            <li>Standard support</li>
+                            <li>Basic reporting</li>
+                        </ul>
+                    </div>
+                    <div class="pricing-cta">
+                        <a href="#contact" class="cta-button">Get Started</a>
+                    </div>
+                </div>
+
+                <div class="pricing-card featured">
+                    <div class="featured-badge">Most Popular</div>
+                    <div class="pricing-header">
+                        <h3 class="plan-name">Professional</h3>
+                        <div class="plan-price">TBD</div>
+                        <div class="plan-period">to be determined</div>
+                    </div>
+                    <div class="pricing-features">
+                        <ul>
+                            <li>Up to 25 Facebook Pages</li>
+                            <li>Advanced search & filtering</li>
+                            <li>Evidence bundle exports</li>
+                            <li>Priority support</li>
+                            <li>Advanced analytics</li>
+                            <li>API access</li>
+                            <li>Custom retention policies</li>
+                        </ul>
+                    </div>
+                    <div class="pricing-cta">
+                        <a href="#contact" class="cta-button">Get Started</a>
+                    </div>
+                </div>
+
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3 class="plan-name">Enterprise</h3>
+                        <div class="plan-price">TBD</div>
+                        <div class="plan-period">to be determined</div>
+                    </div>
+                    <div class="pricing-features">
+                        <ul>
+                            <li>Unlimited Facebook Pages</li>
+                            <li>Custom integrations</li>
+                            <li>Dedicated support</li>
+                            <li>Advanced security features</li>
+                            <li>Custom compliance features</li>
+                            <li>On-premise deployment</li>
+                            <li>Training & consultation</li>
+                        </ul>
+                    </div>
+                    <div class="pricing-cta">
+                        <a href="#contact" class="cta-button">Contact Sales</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq" id="faq">
+        <div class="container">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <h4>When will the app be available?</h4>
+                    <p>The Civic Vault is currently under development. Contact us to be notified when we launch and to schedule a demo.</p>
+                </div>
+                <div class="faq-item">
+                    <h4>Can I change plans later?</h4>
+                    <p>Yes, you can upgrade or downgrade your plan at any time. Changes take effect at the start of your next billing cycle.</p>
+                </div>
+                <div class="faq-item">
+                    <h4>Is there a setup fee?</h4>
+                    <p>No setup fees. We provide free onboarding and training to get you started quickly.</p>
+                </div>
+                <div class="faq-item">
+                    <h4>What about data retention?</h4>
+                    <p>All plans include unlimited data retention. Your archived content is stored securely and accessible indefinitely.</p>
+                </div>
+                <div class="faq-item">
+                    <h4>Do you offer government discounts?</h4>
+                    <p>Yes, we offer special pricing for government agencies and educational institutions. Contact us for details.</p>
+                </div>
+                <div class="faq-item">
+                    <h4>What support is included?</h4>
+                    <p>All plans include email support. Professional and Enterprise plans include priority phone and chat support.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section" id="contact">
+        <div class="container">
+            <h2>Ready to Modernize Your Facebook Archiving?</h2>
+            <p>Join government agencies that trust The Civic Vault for secure, compliant Facebook Page archiving.</p>
+            <a href="#contact" class="cta-button">Notify When Available</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
     <footer>
-        <div class="footer-content">
-            <p class="footer-text">© 2025 The Civic Vault. Social Media archiving made easy</p>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Product</h4>
+                    <ul>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#specs">Technical Specs</a></li>
+                        <li><a href="#pricing">Pricing</a></li>
+                        <li><a href="#security">Security</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Solutions</h4>
+                    <ul>
+                        <li><a href="#solutions">Government Sectors</a></li>
+                        <li><a href="#solutions">Compliance</a></li>
+                        <li><a href="#solutions">Transparency</a></li>
+                        <li><a href="#solutions">Records Management</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="#faq">FAQ</a></li>
+                        <li><a href="#documentation">Documentation</a></li>
+                        <li><a href="#api">API Reference</a></li>
+                        <li><a href="#support">Support Center</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#careers">Careers</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 The Civic Vault. All rights reserved. | Secure • Compliant • Reliable</p>
+            </div>
         </div>
     </footer>
 
     <script>
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
+        // Scroll spy to highlight current section
+        (function() {
+            const links = Array.from(document.querySelectorAll('.nav-links a[data-spy]'));
+            const sections = links
+              .map(a => document.querySelector(a.getAttribute('href')))
+              .filter(Boolean);
 
-        // Add scroll effect to header
-        window.addEventListener('scroll', function() {
-            const header = document.querySelector('header');
-            if (window.scrollY > 50) {
-                header.style.background = 'rgba(26, 26, 26, 0.95)';
-            } else {
-                header.style.background = 'linear-gradient(180deg, #1a1a1a 0%, #0a0a0a 100%)';
-            }
-        });
+            if (!links.length || !sections.length) return;
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    const id = entry.target.getAttribute('id');
+                    const link = links.find(a => a.getAttribute('href') === '#' + id);
+                    if (!link) return;
+                    if (entry.isIntersecting) {
+                        links.forEach(l => l.classList.remove('active'));
+                        link.classList.add('active');
+                    }
+                });
+            }, { rootMargin: '-50% 0px -50% 0px', threshold: 0.01 });
+
+            sections.forEach(sec => observer.observe(sec));
+        })();
     </script>
 </body>
 </html>

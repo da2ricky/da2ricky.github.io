@@ -628,6 +628,84 @@
             box-shadow: var(--shadow-xl);
         }
 
+        /* Contact Form */
+        .contact-card {
+            background: var(--bg-white);
+            color: var(--text-dark);
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: var(--shadow-lg);
+            text-align: left;
+        }
+
+        .contact-card h3 {
+            margin-bottom: 0.5rem;
+            font-size: 1.75rem;
+            color: var(--text-dark);
+        }
+
+        .contact-card p {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .form-row {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-row label {
+            font-weight: 600;
+        }
+
+        .form-control {
+            background: var(--bg-light);
+            border: 1px solid var(--border-light);
+            border-radius: 10px;
+            padding: 0.75rem 1rem;
+            color: var(--text-dark);
+            transition: box-shadow 0.2s, border-color 0.2s, background 0.2s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.2);
+            border-color: var(--primary-blue);
+            background: var(--bg-white);
+        }
+
+        .form-actions {
+            margin-top: 1.5rem;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .error-text {
+            color: #b91c1c;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .is-invalid {
+            border-color: #dc2626 !important;
+            box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.15) !important;
+            background: #fff !important;
+        }
+
+        @media (max-width: 768px) {
+            .contact-card { padding: 1.25rem; }
+        }
+
         /* Footer */
         footer {
             background: var(--bg-white);
@@ -950,7 +1028,7 @@
                         </ul>
                     </div>
                     <div class="pricing-cta">
-                        <a href="#contact" class="cta-button">Get Started</a>
+                        <a href="#contact" class="cta-button">Notify When Available</a>
                     </div>
                 </div>
 
@@ -973,7 +1051,7 @@
                         </ul>
                     </div>
                     <div class="pricing-cta">
-                        <a href="#contact" class="cta-button">Get Started</a>
+                        <a href="#contact" class="cta-button">Notify When Available</a>
                     </div>
                 </div>
 
@@ -995,7 +1073,7 @@
                         </ul>
                     </div>
                     <div class="pricing-cta">
-                        <a href="#contact" class="cta-button">Contact Sales</a>
+                        <a href="#contact" class="cta-button">Notify When Available</a>
                     </div>
                 </div>
             </div>
@@ -1009,7 +1087,7 @@
             <div class="faq-grid">
                 <div class="faq-item">
                     <h4>When will the app be available?</h4>
-                    <p>The Civic Vault is currently under development. Contact us to be notified when we launch and to schedule a demo.</p>
+                    <p>The Civic Vault is currently under development. Use the form below to be notified when it launches.</p>
                 </div>
                 <div class="faq-item">
                     <h4>Can I change plans later?</h4>
@@ -1024,8 +1102,8 @@
                     <p>All plans include unlimited data retention. Your archived content is stored securely and accessible indefinitely.</p>
                 </div>
                 <div class="faq-item">
-                    <h4>Do you offer government discounts?</h4>
-                    <p>Yes, we offer special pricing for government agencies and educational institutions. Contact us for details.</p>
+                    <h4>Self-hosted or hosted?</h4>
+                    <p>Both. We plan to offer self‑hosted and managed hosted options so agencies can choose what fits policy and IT preferences.</p>
                 </div>
                 <div class="faq-item">
                     <h4>What support is included?</h4>
@@ -1038,9 +1116,43 @@
     <!-- CTA Section -->
     <section class="cta-section" id="contact">
         <div class="container">
-            <h2>Ready to Modernize Your Facebook Archiving?</h2>
-            <p>Join government agencies that trust The Civic Vault for secure, compliant Facebook Page archiving.</p>
-            <a href="#contact" class="cta-button">Notify When Available</a>
+            <h2>Stay in the loop</h2>
+            <p>Enter your details and we will notify you as soon as The Civic Vault is available.</p>
+            <div class="contact-card">
+                <h3>Notify me when available</h3>
+                <p>We will only use this information to contact you about availability.</p>
+                <form id="notify-form" action="https://formsubmit.co/info@thecivicarchive.com" method="POST" novalidate>
+                    <input type="hidden" name="_captcha" value="false">
+                    <input type="hidden" name="_subject" value="Notify When Available - The Civic Vault">
+                    <div class="form-grid">
+                        <div class="form-row">
+                            <label for="name">Full name</label>
+                            <input id="name" name="name" type="text" class="form-control" placeholder="Jane Doe" required>
+                        </div>
+                        <div class="form-row">
+                            <label for="email">Email</label>
+                            <input id="email" name="email" type="email" class="form-control" placeholder="you@example.gov" required>
+                            <div id="email-error" class="error-text" style="display:none;">Please enter a valid email address.</div>
+                        </div>
+                    </div>
+                    <div class="form-row" style="margin-top:1rem;">
+                        <label for="message">Message (optional)</label>
+                        <textarea id="message" name="message" rows="4" class="form-control" placeholder="Tell us about your use case"></textarea>
+                    </div>
+                    <div class="form-row" style="margin-top:1rem;">
+                        <label for="captcha">Verification</label>
+                        <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;">
+                            <input id="captcha" name="captcha" type="text" class="form-control" placeholder="Type the word shown" style="max-width:260px;" required>
+                            <span id="captcha-prompt" style="font-weight:700;color:var(--primary-blue);"></span>
+                            <button type="button" id="captcha-refresh" class="secondary-button" style="padding:0.5rem 0.75rem;">New</button>
+                        </div>
+                        <div id="captcha-error" class="error-text" style="display:none;">Verification did not match. Try again.</div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="cta-button">Notify When Available</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </section>
 
@@ -1049,38 +1161,8 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <h4>Product</h4>
-                    <ul>
-                        <li><a href="#features">Features</a></li>
-                        <li><a href="#specs">Technical Specs</a></li>
-                        <li><a href="#pricing">Pricing</a></li>
-                        <li><a href="#security">Security</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Solutions</h4>
-                    <ul>
-                        <li><a href="#solutions">Government Sectors</a></li>
-                        <li><a href="#solutions">Compliance</a></li>
-                        <li><a href="#solutions">Transparency</a></li>
-                        <li><a href="#solutions">Records Management</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Resources</h4>
-                    <ul>
-                        <li><a href="#faq">FAQ</a></li>
-                        <li><a href="#documentation">Documentation</a></li>
-                        <li><a href="#api">API Reference</a></li>
-                        <li><a href="#support">Support Center</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
                     <h4>Company</h4>
                     <ul>
-                        <li><a href="#about">About Us</a></li>
-                        <li><a href="#careers">Careers</a></li>
-                        <li><a href="#contact">Contact</a></li>
                         <li><a href="privacy.html">Privacy Policy</a></li>
                     </ul>
                 </div>
@@ -1114,6 +1196,74 @@
             }, { rootMargin: '-50% 0px -50% 0px', threshold: 0.01 });
 
             sections.forEach(sec => observer.observe(sec));
+        })();
+
+        // Live email validation + simple captcha (math) for contact form
+        (function() {
+            const form = document.getElementById('notify-form');
+            if (!form) return;
+
+            const email = document.getElementById('email');
+            const emailErr = document.getElementById('email-error');
+            const captchaInput = document.getElementById('captcha');
+            const captchaErr = document.getElementById('captcha-error');
+            const captchaPrompt = document.getElementById('captcha-prompt');
+            const captchaRefresh = document.getElementById('captcha-refresh');
+
+            // Generate a simple math captcha like 5 + 3
+            let a = 0, b = 0, answer = 0;
+            function newCaptcha() {
+                a = 2 + Math.floor(Math.random() * 8); // 2..9
+                b = 1 + Math.floor(Math.random() * 9); // 1..9
+                answer = a + b;
+                if (captchaPrompt) captchaPrompt.textContent = `Solve: ${a} + ${b}`;
+                if (captchaInput) captchaInput.value = '';
+            }
+
+            newCaptcha();
+            captchaRefresh && captchaRefresh.addEventListener('click', function() {
+                newCaptcha();
+            });
+
+            // Email regex (concise, practical)
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            function validateEmailLive() {
+                const valid = emailRegex.test(email.value.trim());
+                if (valid) {
+                    email.classList.remove('is-invalid');
+                    emailErr.style.display = 'none';
+                } else {
+                    // show only if user typed something
+                    if (email.value.length > 0) {
+                        email.classList.add('is-invalid');
+                        emailErr.style.display = 'block';
+                    } else {
+                        email.classList.remove('is-invalid');
+                        emailErr.style.display = 'none';
+                    }
+                }
+                return valid;
+            }
+
+            email && email.addEventListener('input', validateEmailLive);
+
+            form.addEventListener('submit', function(e) {
+                let ok = true;
+                if (!validateEmailLive()) ok = false;
+
+                const capOk = (captchaInput.value || '').trim() === String(answer);
+                if (!capOk) {
+                    ok = false;
+                    captchaInput.classList.add('is-invalid');
+                    captchaErr.style.display = 'block';
+                    newCaptcha();
+                } else {
+                    captchaInput.classList.remove('is-invalid');
+                    captchaErr.style.display = 'none';
+                }
+
+                if (!ok) e.preventDefault();
+            });
         })();
     </script>
 </body>
